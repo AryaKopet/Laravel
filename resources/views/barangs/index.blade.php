@@ -14,34 +14,36 @@
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <h3 class="text-center my-4">Tutorial Laravel 10 untuk Pemula</h3>
-                    <h5 class="text-center"><a href="https://santrikoding.com">www.santrikoding.com</a></h5>         
+                    <h3 class="text-center my-4">Menambahkan Barang</h3>
+                    <h5 class="text-center"><a href="http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=db_laravel_10&table=barangs" target="_blank">lihat database</a></h5>               
                     <hr>
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('barangs.create') }}" class="btn btn-md btn-success mb-3">TAMBAH POST</a>
+                        <a href="{{ route('barangs.create') }}" class="btn btn-md btn-success mb-3">Tambah Barang</a>
                         <table class="table table-bordered">
                             <thead>
                               <tr>
-                                <th scope="col">GAMBAR</th>
-                                <th scope="col">JUDUL</th>
-                                <th scope="col">CONTENT</th>
-                                <th scope="col">AKSI</th>
+                                <th scope="col">Nama Barang</th>
+                                <th scope="col">Jumlah</th>
+                                <th scope="col">Keterangan</th>
+                                <th scope="col">Harga Barang</th>
+                                <th scope="col">Id Kategori</th>
+                                <th scope="col">Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
                               @forelse ($barangs as $barang)
                                 <tr>
+                                    <td>{{ $barang->nama_barang }}</td>
+                                    <td>{{ $barang->jumlah }}</td>
+                                    <td>{!! $barang->keterangan !!}</td>
+                                    <td>{{ $barang->harga_barang }}</td>
+                                    <td>{{ $barang->id_kategori }}</td>
                                     <td class="text-center">
-                                        <img src="{{ asset('/storage/posts/'.$post->image) }}" class="rounded" style="width: 150px">
-                                    </td>
-                                    <td>{{ $barang->title }}</td>
-                                    <td>{!! $barang->content !!}</td>
-                                    <td class="text-center">
-                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('barangs.destroy', $post->id) }}" method="POST">
-                                            <a href="{{ route('barangs.show', $barang->id) }}" class="btn btn-sm btn-dark">SHOW</a>
-                                            <a href="{{ route('barangs.edit', $barang->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('barangs.destroy', $barang->id_barang) }}" method="POST">
+                                            <a href="{{ route('barangs.show', $barang->id_barang) }}" class="btn btn-sm btn-dark">SHOW</a>
+                                            <a href="{{ route('barangs.edit', $barang->id_barang) }}" class="btn btn-sm btn-primary">EDIT</a>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
@@ -50,7 +52,7 @@
                                 </tr>
                               @empty
                                   <div class="alert alert-danger">
-                                      Data Post belum Tersedia.
+                                      Barang belum Tersedia.
                                   </div>
                               @endforelse
                             </tbody>

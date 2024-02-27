@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Data Kategoris</title>
+    <title>Kategori</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
@@ -14,32 +14,27 @@
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <h3 class="text-center my-4">Tutorial Laravel 10 untuk Pemula</h3>
-                    <h5 class="text-center"><a href="https://santrikoding.com">www.santrikoding.com</a></h5>         
+                    <h3 class="text-center my-4">Tabel Kategori</h3>
+                    <h5 class="text-center"><a href="http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=db_laravel_10&table=kategoris" target="_blank">lihat database</a></h5>         
                     <hr>
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('kategoris.create') }}" class="btn btn-md btn-success mb-3">TAMBAH POST</a>
+                        <a href="{{ route('kategoris.create') }}" class="btn btn-md btn-success mb-3">TAMBAH KATEGORI</a>
                         <table class="table table-bordered">
                             <thead>
                               <tr>
-                                <th scope="col">GAMBAR</th>
-                                <th scope="col">JUDUL</th>
-                                <th scope="col">CONTENT</th>
-                                <th scope="col">AKSI</th>
+                                <th scope="col">Nama Kategori</th>
+                                <th scope="col" class="text-center">Aksi</th>
+                               
                               </tr>
                             </thead>
                             <tbody>
                               @forelse ($kategoris as $kategori)
                                 <tr>
+                                    <td>{{ $kategori->nama_kategori }}</td>
                                     <td class="text-center">
-                                        <img src="{{ asset('/storage/posts/'.$post->image) }}" class="rounded" style="width: 150px">
-                                    </td>
-                                    <td>{{ $post->title }}</td>
-                                    <td>{!! $post->content !!}</td>
-                                    <td class="text-center">
-                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('kategoris.destroy', $post->id) }}" method="POST">
+                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('kategoris.destroy', $kategori->id) }}" method="POST">
                                             <a href="{{ route('kategoris.show', $kategori->id) }}" class="btn btn-sm btn-dark">SHOW</a>
                                             <a href="{{ route('kategoris.edit', $kategori->id) }}" class="btn btn-sm btn-primary">EDIT</a>
                                             @csrf
@@ -50,7 +45,7 @@
                                 </tr>
                               @empty
                                   <div class="alert alert-danger">
-                                      Data Post belum Tersedia.
+                                      Kategoti Belum Tersedia.
                                   </div>
                               @endforelse
                             </tbody>
@@ -68,8 +63,7 @@
 
     <script>
         //message with toastr
-        
-        @if(session()->has('success'));
+        @if(session()->has('success'))
         
             toastr.success('{{ session('success') }}', 'BERHASIL!'); 
 
@@ -78,7 +72,6 @@
             toastr.error('{{ session('error') }}', 'GAGAL!'); 
             
         @endif
-        
     </script>
 
 </body>
